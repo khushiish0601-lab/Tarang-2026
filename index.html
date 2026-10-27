@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TARANG 2026 - MCM DAV College Chandigarh Pass System</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Vector Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Cryptographic QR Engine -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <style>
+        body { 
+            background: radial-gradient(circle at top, #2b0c4f 0%, #0d031c 100%);
+            color: #fffbeb; 
+            font-family: system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            touch-action: manipulation;
+        }
+        .diwali-banner-gradient { 
+            background: linear-gradient(135deg, #ea580c 0%, #c2410c 50%, #9a3412 100%); 
+        }
+        .diwali-card { 
+            background: rgba(35, 14, 58, 0.88); 
+            backdrop-filter: blur(14px); 
+            border: 1.5px solid rgba(251, 191, 36, 0.4); 
+            box-shadow: 0 10px 30px 0 rgba(245, 158, 11, 0.15);
+        }
+        .nav-btn.active { 
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); 
+            color: #1c0536; 
+            font-weight: 800;
+            box-shadow: 0 0 18px rgba(245, 158, 11, 0.6); 
+        }
+    </style>
+</head>
+<body class="pb-24 select-none">
+
+    <!-- Header with Festive Diya & Marigold Vibe -->
+    <header class="diwali-banner-gradient text-white py-4 px-4 text-center shadow-2xl border-b-4 border-amber-400 relative overflow-hidden">
+        <div class="absolute -top-1 left-3 text-amber-200 opacity-80 text-xl">🪔</div>
+        <div class="absolute -top-1 right-3 text-amber-200 opacity-80 text-xl">🪔</div>
+        <p class="text-[10px] uppercase tracking-widest text-amber-200 font-extrabold mb-0.5">MCM DAV College for Women, Chandigarh</p>
+        <h1 class="text-2xl font-black tracking-wider text-amber-100 drop-shadow-md">✨ TARANG 2026 ✨</h1>
+        <p class="text-[11px] uppercase tracking-widest text-amber-100 font-bold">Diwali Fest Gaming Zone Pass System</p>
+    </header>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="fixed bottom-0 left-0 right-0 diwali-card border-t-2 border-amber-500/60 z-50 flex justify-around py-2 px-2 shadow-2xl">
+        <button onclick="switchTab('entrance')" id="btn-entrance" class="nav-btn active flex flex-col items-center justify-center flex-1 py-2 text-xs font-semibold text-amber-200 rounded-xl transition-all">
+            <i class="fa-solid fa-ticket text-lg mb-1"></i>
+            <span>Entrance Desk</span>
+        </button>
+        <button onclick="switchTab('scanner')" id="btn-scanner" class="nav-btn flex flex-col items-center justify-center flex-1 py-2 text-xs font-semibold text-amber-200 rounded-xl transition-all">
+            <i class="fa-solid fa-qrcode text-lg mb-1"></i>
+            <span>Game Scanner</span>
+        </button>
+        <button onclick="switchTab('dashboard')" id="btn-dashboard" class="nav-btn flex flex-col items-center justify-center flex-1 py-2 text-xs font-semibold text-amber-200 rounded-xl transition-all">
+            <i class="fa-solid fa-chart-line text-lg mb-1"></i>
+            <span>Dashboard</span>
+        </button>
+    </nav>
+
+    <!-- Main Content Containers -->
+    <main class="max-w-md mx-auto p-4 space-y-6">
+
+        <!-- SCREEN 1: ENTRANCE PASS DESK -->
+        <section id="tab-entrance" class="space-y-4">
+            <div class="diwali-card p-5 rounded-2xl space-y-4">
+                <div class="flex items-center space-x-3 text-amber-400">
+                    <i class="fa-solid fa-fire-flame-curved text-2xl text-amber-400"></i>
+                    <h2 class="text-lg font-bold text-amber-200">Issue Festive Pass (₹200)</h2>
+                </div>
+                <div class="space-y-3 pt-1">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-amber-400 mb-1">Participant Name</label>
+                        <input type="text" id="participant-name" placeholder="Enter Full Name" class="w-full bg-purple-950/90 border border-amber-500/50 rounded-xl px-4 py-3 text-white placeholder-amber-200/30 focus:outline-none focus:border-amber-400 font-medium">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-amber-400 mb-1">UPI Reference / UTR Number</label>
+                        <input type="text" id="upi-ref" placeholder="12-digit transaction ID" class="w-full bg-purple-950/90 border border-amber-500/50 rounded-xl px-4 py-3 text-white placeholder-amber-200/30 focus:outline-none focus:border-amber-400 font-medium">
+                    </div>
+                    <div class="flex items-center space-x-2 py-2">
+                        <input type="checkbox" id="verify-payment" class="w-5 h-5 accent-amber-500 rounded cursor-pointer">
+                        <label for="verify-payment" class="text-xs text-amber-100 select-none cursor-pointer font-medium">Verified ₹200 UPI payment credit</label>
+                    </div>
+                    <button onclick="generatePass()" class="w-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-purple-950 font-black py-3 px-4 rounded-xl transition-all shadow-lg shadow-amber-500/30 flex items-center justify-center space-x-2 cursor-pointer">
+                        <i class="fa-solid fa-sparkles"></i>
+                        <span>Generate Pass & QR Code</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Ticket Output -->
+            <div id="pass-result-card" class="diwali-card p-5 rounded-2xl border-2 border-amber-400 hidden text-center space-y-4">
+                <div class="text-emerald-400 text-xs font-bold flex items-center justify-center space-x-1">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>PASS ACTIVE - ALL GAMES UNLOCKED</span>
+                </div>
+                <h3 id="display-pass-name" class="text-xl font-black text-amber-200"></h3>
+                <p id="display-pass-id" class="text-xs font-mono text-amber-400 font-semibold"></p>
+                
+                <div class="bg-white p-4 inline-block rounded-xl mx-auto shadow-2xl">
+                    <div id="qrcode" class="mx-auto"></div>
+                </div>
+                
+                <div class="text-left text-xs bg-purple-950/90 p-3 rounded-xl border border-amber-500/30 space-y-1">
+                    <div class="text-amber-300 font-bold uppercase tracking-wider mb-1">Single Turn Allocation:</div>
+                    <div class="grid grid-cols-2 gap-1 text-amber-100/90">
+                        <div>🎯 Air gun (1/1)</div> <div>🏺 Pottery (1/1)</div>
+                        <div>🏀 Basketball (1/1)</div> <div>⭕ Ring toss (1/1)</div>
+                        <div>🎯 Dart game (1/1)</div> <div>🎲 Other Games (1/1)</div>
+                    </div>
+                </div>
+                <button onclick="resetEntranceForm()" class="text-xs text-amber-400 hover:text-amber-300 underline font-bold">Issue Another Pass</button>
+            </div>
+        </section>
+
+        <!-- SCREEN 2: GAME ATTENDANT SCANNER -->
+        <section id="tab-scanner" class="space-y-4 hidden">
+            <div class="diwali-card p-5 rounded-2xl space-y-4">
+                <div class="flex items-center space-x-3 text-amber-400">
+                    <i class="fa-solid fa-gamepad text-2xl"></i>
+                    <h2 class="text-lg font-bold text-amber-200">Attendant Verification Desk</h2>
+                </div>
+                
+                <div>
+                    <label class="block text-xs font-bold uppercase text-amber-400 mb-1">Select Game Stall</label>
+                    <select id="assigned-game" class="w-full bg-purple-950/90 border border-amber-500/50 rounded-xl px-4 py-3 text-amber-100 font-semibold focus:outline-none focus:border-amber-400">
+                        <option value="Air gun">🎯 Air gun</option>
+                        <option value="Pottery">🏺 Pottery</option>
+                        <option value="Basketball">🏀 Basketball</option>
+                        <option value="Ring toss">⭕ Ring toss</option>
+                        <option value="Dart game">🎯 Dart game</option>
+                        <option value="Other Games">🎲 Other Games</option>
+                    </select>
+                </div>
+
+                <div class="space-y-2 border-t border-amber-500/30 pt-3">
+                    <label class="block text-xs font-bold uppercase text-amber-400">Enter Pass ID Code</label>
+                    <div class="flex space-x-2">
+                        <input type="text" id="scanner-manual-input" placeholder="TRG-XXXXXX" class="flex-1 bg-purple-950/90 border border-amber-500/50 rounded-xl px-4 py-2 text-sm text-white font-medium focus:outline-none">
+                        <button onclick="processScan(document.getElementById('scanner-manual-input').value)" class="bg-amber-400 hover:bg-amber-300 text-purple-950 font-bold px-4 py-2 rounded-xl text-sm transition-all shadow-md">
+                            Verify Turn
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="scan-feedback" class="p-4 rounded-xl text-center font-bold text-sm hidden transition-all duration-300"></div>
+        </section>
+
+        <!-- SCREEN 3: DASHBOARD -->
+        <section id="tab-dashboard" class="space-y-4 hidden">
+            <div class="grid grid-cols-2 gap-3">
+                <div class="diwali-card p-4 rounded-xl text-center">
+                    <div class="text-[11px] font-bold uppercase tracking-wider text-amber-400">Total Passes</div>
+                    <div id="stat-total-passes" class="text-3xl font-black text-white mt-1">0</div>
+                </div>
+                <div class="diwali-card p-4 rounded-xl text-center">
+                    <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-400">Collections</div>
+                    <div id="stat-total-revenue" class="text-3xl font-black text-emerald-400 mt-1">₹0</div>
+                </div>
+            </div>
+            <div class="diwali-card p-4 rounded-xl text-center">
+                <div class="text-[11px] font-bold uppercase tracking-wider text-amber-400">Total Game Turns Redeemed</div>
+                <div id="stat-total-turns" class="text-3xl font-black text-amber-300 mt-1">0</div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let passes = JSON.parse(localStorage.getItem('tarang_passes') || '{}');
+        let wakeLock = null;
+
+        async function requestWakeLock() {
+            try {
+                if ('wakeLock' in navigator) {
+                    wakeLock = await navigator.wakeLock.request('screen');
+                }
+            } catch (err) {
+                console.log('Wake Lock note:', err);
+            }
+        }
+        document.addEventListener('visibilitychange', async () => {
+            if (wakeLock !== null && document.visibilityState === 'visible') {
+                await requestWakeLock();
+            }
+        });
+        requestWakeLock();
+
+        function updateStats() {
+            const keys = Object.keys(passes);
+            let totalTurns = 0;
+            keys.forEach(k => {
+                totalTurns += passes[k].gamesPlayed.length;
+            });
+            document.getElementById('stat-total-passes').innerText = keys.length;
+            document.getElementById('stat-total-revenue').innerText = '₹' + (keys.length * 200);
+            document.getElementById('stat-total-turns').innerText = totalTurns;
+        }
+
+        function switchTab(tabName) {
+            ['entrance', 'scanner', 'dashboard'].forEach(tab => {
+                document.getElementById('tab-' + tab).classList.add('hidden');
+                document.getElementById('btn-' + tab).classList.remove('active');
+            });
+            document.getElementById('tab-' + tabName).classList.remove('hidden');
+            document.getElementById('btn-' + tabName).classList.add('active');
+            if (tabName === 'dashboard') updateStats();
+        }
+
+        function generatePass() {
+            const name = document.getElementById('participant-name').value.trim();
+            const upi = document.getElementById('upi-ref').value.trim();
+            const verified = document.getElementById('verify-payment').checked;
+
+            if (!name || !upi || !verified) {
+                alert('Please enter Participant Name, UPI Reference ID, and verify payment checkbox.');
+                return;
+            }
+
+            const passId = 'TRG-' + Math.floor(100000 + Math.random() * 900000);
+            passes[passId] = { name: name, upi: upi, gamesPlayed: [] };
+            localStorage.setItem('tarang_passes', JSON.stringify(passes));
+
+            document.getElementById('display-pass-name').innerText = name;
+            document.getElementById('display-pass-id').innerText = 'Pass Code: ' + passId;
+            
+            const qrContainer = document.getElementById('qrcode');
+            qrContainer.innerHTML = '';
+            new QRCode(qrContainer, { text: passId, width: 130, height: 130 });
+
+            document.getElementById('pass-result-card').classList.remove('hidden');
+        }
+
+        function resetEntranceForm() {
+            document.getElementById('participant-name').value = '';
+            document.getElementById('upi-ref').value = '';
+            document.getElementById('verify-payment').checked = false;
+            document.getElementById('pass-result-card').classList.add('hidden');
+        }
+
+        function processScan(passId) {
+            const feedback = document.getElementById('scan-feedback');
+            const game = document.getElementById('assigned-game').value;
+            passId = passId.trim().toUpperCase();
+
+            feedback.classList.remove('hidden', 'bg-emerald-950', 'bg-rose-950', 'text-emerald-300', 'text-rose-300', 'border-emerald-500', 'border-rose-500');
+
+            if (!passes[passId]) {
+                feedback.className = "p-4 rounded-xl text-center font-bold text-sm bg-rose-950 text-rose-300 border border-rose-500";
+                feedback.innerHTML = "❌ INVALID PASS CODE!<br>Pass code not found in system.";
+                return;
+            }
+
+            const p = passes[passId];
+            if (p.gamesPlayed.includes(game)) {
+                feedback.className = "p-4 rounded-xl text-center font-bold text-sm bg-rose-950 text-rose-300 border border-rose-500";
+                feedback.innerHTML = `⚠️ ALREADY PLAYED!<br><b>${p.name}</b> has already used their 1 turn for <b>${game}</b>!`;
+            } else {
+                p.gamesPlayed.push(game);
+                localStorage.setItem('tarang_passes', JSON.stringify(passes));
+                
+                feedback.className = "p-4 rounded-xl text-center font-bold text-sm bg-emerald-950 text-emerald-300 border border-emerald-500";
+                feedback.innerHTML = `✅ ACCESS GRANTED!<br>Welcome <b>${p.name}</b> to <b>${game}</b> (Turn ${p.gamesPlayed.length}/6 recorded).`;
+                document.getElementById('scanner-manual-input').value = '';
+            }
+        }
+    </script>
+</body>
+</html>
